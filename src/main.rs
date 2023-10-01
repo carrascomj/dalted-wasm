@@ -5,13 +5,7 @@ use web_sys::{Event, FileReader, HtmlDivElement};
 mod image_processing;
 use image_processing::{color_filter, decode_raw_image, matrices::MATRICES};
 
-// Iteration is a very common task in most applications.
-// So how do you take a list of data and render it in the DOM?
-// This example will show you the two ways:
-// 1) for mostly-static lists, using Rust iterators
-// 2) for lists that grow, shrink, or move items, using <For/>
-
-/// A list of images that will be filled with images.
+/// A list of images that to be filled and a form.
 #[component]
 fn App(cx: Scope) -> impl IntoView {
     let (msg, set_msg) = create_signal(cx, "Send an Image!");
