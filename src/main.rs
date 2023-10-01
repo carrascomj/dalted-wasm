@@ -7,12 +7,11 @@ use image_processing::{color_filter, decode_raw_image, matrices::MATRICES};
 
 /// A list of images that to be filled and a form.
 #[component]
-fn App(cx: Scope) -> impl IntoView {
-    let (msg, set_msg) = create_signal(cx, "Send an Image!");
-    let (shared_img, set_image): (ReadSignal<Option<image::DynamicImage>>, _) =
-        create_signal(cx, None);
+fn App() -> impl IntoView {
+    let (msg, set_msg) = create_signal("Send an Image!");
+    let (shared_img, set_image): (ReadSignal<Option<image::DynamicImage>>, _) = create_signal(None);
     // create the file input and file reader to use in the input button
-    let file_input = create_node_ref::<html::Input>(cx);
+    let file_input = create_node_ref::<html::Input>();
     let filereader = FileReader::new().unwrap().dyn_into::<FileReader>().unwrap();
     let onload = Closure::wrap(Box::new(move |event: Event| {
         let element = event.target().unwrap().dyn_into::<FileReader>().unwrap();
@@ -27,7 +26,7 @@ fn App(cx: Scope) -> impl IntoView {
 
     // once shared_img changes, compute each image transformation
     let imgs = MATRICES.map(|mat| {
-        view! { cx,
+        view! {
                 <picture class="flex-pic">
                 <img class="flex-img" src={move || shared_img.with(|im|
                     {
@@ -41,7 +40,7 @@ fn App(cx: Scope) -> impl IntoView {
     });
 
     // form to submit the image and img reactive frames
-    view! { cx,
+    view! {
 
         <div class="user-sweep" id="box">
         <div class="upload-btn-wrapper">
@@ -78,6 +77,6 @@ fn main() {
             .dyn_into::<HtmlDivElement>()
             .unwrap()
             .into(),
-        |cx| view! { cx, <App/> },
+        App,
     );
 }
