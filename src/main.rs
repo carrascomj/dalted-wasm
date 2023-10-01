@@ -4,10 +4,6 @@ use wasm_bindgen::{closure::Closure, JsCast};
 use web_sys::{Event, FileReader, HtmlDivElement};
 mod image_processing;
 use image_processing::{color_filter, decode_raw_image, matrices::MATRICES};
-use serde::{Deserialize, Serialize};
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct Example(String);
 
 // Iteration is a very common task in most applications.
 // So how do you take a list of data and render it in the DOM?
