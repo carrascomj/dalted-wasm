@@ -39,27 +39,42 @@ fn App() -> impl IntoView {
         }
     });
 
-    // form to submit the image and img reactive frames
     view! {
-
+        // navegation bar bar
+        <nav class="nav-title">
+            <div class="explanation">
+              <a class="flex-pic" href="https://github.com/carrascomj/dalted">
+                <picture class="flex-pic"
+                  ><img src="gh.svg" alt="github link" class="gh" />
+                </picture>
+              </a>
+              <p class="exp-text">
+                Rapid color blindness simulation <br />
+                Is your image color-friendly?
+              </p>
+            </div>
+            <img src="logo.svg" class="main" />
+            <p class="about"><a href="/about.html">About</a></p>
+        </nav>
+        // form for image submission
         <div class="user-sweep" id="box">
-        <div class="upload-btn-wrapper">
+            <div class="upload-btn-wrapper">
+            <p>{msg}</p>
+            <form>
+                <input type="file" node_ref=file_input
+                    on:change=move |ev| {
+                        ev.prevent_default();
+                        let files = file_input().unwrap().files().map(|x| x.get(0));
+                        if let Some(Some(file)) = files {
+                             set_msg("Processing!");
+                             filereader.read_as_binary_string(&file).unwrap();                    }
+                        }
+                />
 
-        <p>{msg}</p>
-        <form>
-            <input type="file" node_ref=file_input
-                on:change=move |ev| {
-                    ev.prevent_default();
-                    let files = file_input().unwrap().files().map(|x| x.get(0));
-                    if let Some(Some(file)) = files {
-                         set_msg("Processing!");
-                         filereader.read_as_binary_string(&file).unwrap();                    }
-                    }
-            />
-
-        </form>
+            </form>
+            </div>
         </div>
-        </div>
+        // displayed images
         <div class="portrait">
             {imgs}
         </div>
