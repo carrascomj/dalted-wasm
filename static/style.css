@@ -75,6 +75,25 @@ a:hover {
   grid-area: "about";
 }
 
+.abouting {
+  border: solid 1px #353335;
+  margin: 0.4em;
+  padding: 0.4em;
+	position: absolute;
+  float: left;
+  right: 1em;
+  top: 5em;
+  width: 30%;
+}
+
+.profile-pic {
+  float:left;
+  margin-right: 1em;
+  border-radius: 50%;
+  shape-outside: ellipse();
+  background-color: MediumPurple;
+}
+
 .exp-text {
   width: 90%;
 }

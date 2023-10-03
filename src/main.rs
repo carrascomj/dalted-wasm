@@ -5,6 +5,46 @@ use web_sys::{Event, FileReader, HtmlDivElement};
 mod image_processing;
 use image_processing::{color_filter, decode_raw_image, matrices::MATRICES};
 
+#[component]
+fn NavBar() -> impl IntoView {
+    let (shown, set_shown) = create_signal(true);
+    let (thing_I_like, set_things) = create_signal(0usize);
+    const THINGS_I_LIKE: [&'static str; 3] = ["parrots", "cockatoos", "macaws"];
+    const COLORS: [&'static str; 3] = ["#ba2f33", "#3bb477", "#3a44bf"];
+    view! {
+    <nav class="nav-title">
+        <div class="explanation">
+          <a class="flex-pic" href="https://github.com/carrascomj/dalted">
+            <picture class="flex-pic"
+              ><img src="gh.svg" alt="github link" class="gh" />
+            </picture>
+          </a>
+          <p class="exp-text">
+            Is your image color-friendly?
+          </p>
+        </div>
+        <img src="logo.svg" class="main"/>
+        <div class="about">
+            <p><a on:click=move |ev|{
+                ev.prevent_default();
+                set_shown.update(|s| {*s=!*s});
+                set_things.update(|i| {*i=if *i < THINGS_I_LIKE.len() - 1 {*i + 1} else { 0}})
+            }
+            >About</a></p>
+        </div>
+    </nav>
+    <div class="explanation abouting" style:display=move || if shown.get() {"none"} else {"block"}>
+        <p> Color blindness simulation </p>
+        <p>
+            <img class="profile-pic" src="https://avatars.githubusercontent.com/u/46683255?s=96&v=4" alt="github profile picture"/>
+            Hi! I am <a href="https://github.com/carrascomj">@carrascomj</a> at Github, this is a client-side webapp using WASM
+            with <a href="https://leptos-rs.github.io/leptos">leptos</a>.
+            Something I like: <em style:color=move || {COLORS[thing_I_like.get()]}>{move || {THINGS_I_LIKE[thing_I_like.get()]}}</em>.
+        </p>
+    </div>
+    }
+}
+
 /// A list of images that to be filled and a form.
 #[component]
 fn App() -> impl IntoView {
@@ -41,21 +81,7 @@ fn App() -> impl IntoView {
 
     view! {
         // navegation bar bar
-        <nav class="nav-title">
-            <div class="explanation">
-              <a class="flex-pic" href="https://github.com/carrascomj/dalted">
-                <picture class="flex-pic"
-                  ><img src="gh.svg" alt="github link" class="gh" />
-                </picture>
-              </a>
-              <p class="exp-text">
-                Rapid color blindness simulation <br />
-                Is your image color-friendly?
-              </p>
-            </div>
-            <img src="logo.svg" class="main" />
-            <p class="about"><a href="/about.html">About</a></p>
-        </nav>
+        <NavBar/>
         // form for image submission
         <div class="user-sweep" id="box">
             <div class="upload-btn-wrapper">
