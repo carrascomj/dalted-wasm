@@ -1,0 +1,258 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "ZCOOL QingKe HuangYou";
+  font-size: 28px;
+  margin: 0;
+  padding: 0;
+  color: #353335;
+  background-color: white;
+}
+
+.cont-grid {
+  /* Main schema of page */
+  display: grid;
+  grid-template-rows: 0.5fr 0.3fr 5fr;
+  grid-gap: 1em;
+}
+
+.cont-grid-about {
+  /* Main schema of page */
+  display: grid;
+  padding: 2em;
+  color: #353335;
+  grid-template-rows: 0.5fr 5.3fr;
+  grid-gap: 1em;
+}
+
+
+.nav-title {
+  grid-column: 1 / 5;
+  margin-top: 0.5em;
+  padding-left: 1em;
+  padding-right: 0em;
+  /* background-color: #353335; */
+  opacity: 1;
+  display: grid;
+  grid-template-columns: 0.3fr 0.4fr 0.2fr;
+  grid-template-areas: "expl title about";
+}
+
+
+.explanation {
+  /* margin-left: 12em; */
+  color: #353335;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 14px;
+  grid-area: "expl";
+}
+
+.gh {
+  width: 30%;
+}
+.main {
+  color: white;
+  width: 100%;
+  align-self: center;
+  grid-area: "title";
+}
+
+a {
+  color: #3bb477;
+}
+
+a:hover {
+  font-weight: bold;
+}
+
+.about {
+  justify-self: end;
+  align-self: center;
+  grid-area: "about";
+}
+
+.abouting {
+  border: solid 1px #353335;
+  margin: 0.4em;
+  padding: 0.4em;
+	position: absolute;
+  float: left;
+  right: 1em;
+  top: 5em;
+  width: 30%;
+}
+
+.profile-pic {
+  float:left;
+  margin-right: 1em;
+  border-radius: 50%;
+  shape-outside: ellipse();
+  background-color: MediumPurple;
+}
+
+.exp-text {
+  width: 90%;
+}
+
+.user-sweep {
+  margin-left: 1em;
+  margin-right: 1em;
+  grid-column: 1 / 5;
+  margin-top: 1em;
+  display: flex;
+  justify-content: center;
+  /* display: inline-block; */
+  /* border-radius: 6px; */
+  /* color: #e0e2cc; */
+  color: #353335;
+  background-color: white;
+  border: solid 1px #353335;
+}
+
+.user-sweep:hover {
+  /* color: #3b444b; */
+  /* border: solid 6px; */
+  font-weight: bold;
+  border: solid 4px #353335;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.upload-btn-wrapper input[type="file"] {
+  font-size: 100px;
+  position: absolute;
+  cursor: pointer;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.pressable {
+  color: #353335;
+  border: solid 1px #353335;
+  /* border-radius: 6px; */
+  padding: 3px;
+  cursor: pointer;
+}
+
+.go {
+  border: solid 1px #353335;
+  /* border-radius: 6px; */
+  padding: 3px;
+  cursor: pointer;
+  width: 6em;
+  opacity: 0;
+}
+
+.pressable:hover {
+  border: solid 3px;
+  font-weight: bold;
+}
+
+.dragtext {
+  display: inline-block;
+}
+
+.portrait {
+  padding: 0;
+  overflow: hidden;
+  grid-column: 1 / 5;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: space-around;
+}
+
+.portrait-content {
+  padding: 0;
+  margin: 2em;
+  grid-column: 1 / 5;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* Mobiles */
+.flex-pic {
+  flex: 1 1 100%;
+  align-self: center;
+  justify-self: center;
+  diplay: block;
+}
+
+.portrait-content > div {
+  flex: 1 1 100%;
+  justify-self: center;
+  diplay: block;
+}
+
+/* Tablets */
+@media screen and (min-device-width: 786px) {
+  .flex-pic {
+    /* flex: 1; */
+    width: 50%;
+    flex-basis: 50%;
+  }
+  .portrait-content > div {
+    flex: 0 50%;
+  }
+  .cont-grid {
+    grid-template-columns: 2fr 2fr;
+  }
+  .cont-grid-about {
+    padding: 0em;
+    margin-right: 0em;
+  }
+  .user-sweep {
+    margin-left: 0em;
+    margin-right: 0em;
+    grid-column: 2 / 3;
+  }
+  .main {
+    width: 65%;
+    justify-self: end;
+  }
+  .explanation {
+    font-size: 22px;
+  }
+  .gh {
+    width: 60%;
+  }
+}
+
+/* Computers */
+@media screen and (min-device-width: 900px) {
+  .nav-title {
+    grid-column: 1 / 5;
+    margin-top: 0.5em;
+    padding-left: 1em;
+    padding-right: 3em;
+    grid-template-columns: 0.4fr 1fr 0.65fr;
+  }
+  .flex-pic {
+    /* flex: 1; */
+    flex-basis: 33%;
+  }
+  .cont-grid {
+    /* Main schema of page */
+    grid-template-columns: 2fr 0.9fr 2fr;
+  }
+}
+
+.flex-img {
+  width: 60%;
+  border: solid 1px #353335;
+  /* background-color: #e0e2cc; */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
